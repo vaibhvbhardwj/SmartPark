@@ -1,0 +1,69 @@
+.admin-layout {
+  display: flex;
+  height: 100vh;
+  background: #f5f7fa;
+}
+
+/* SIDEBAR */
+.admin-sidebar {
+  width: 220px;
+  background: #0f172a;
+  color: white;
+  padding: 20px;
+}
+
+.admin-sidebar ul {
+  list-style: none;
+}
+
+.admin-sidebar li {
+  padding: 12px 0;
+  cursor: pointer;
+}
+
+/* MAIN */
+.admin-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NAVBAR */
+.admin-navbar {
+  background: white;
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* STATS */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+.stat-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* TABLE */
+.admin-section {
+  padding: 20px;
+}
+
+.booking-table {
+  width: 100%;
+  background: white;
+  border-collapse: collapse;
+}
+
+.booking-table th,
+.booking-table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
