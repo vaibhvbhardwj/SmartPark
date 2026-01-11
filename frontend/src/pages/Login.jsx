@@ -2,6 +2,8 @@ import { useState } from "react";
 import api from "../api/axios";
 import "../styles/Auth.css";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
+
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -15,6 +17,8 @@ function Login() {
 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("role", res.data.role);
+      localStorage.setItem("userName", res.data.name);
+      localStorage.setItem("profilePicture", res.data.profilePicture || "");
 
       navigate(res.data.role === "admin" ? "/admin" : "/user");
     } catch (err) {
@@ -24,10 +28,11 @@ function Login() {
 
   return (
     <div className="auth-page">
+      <Navbar/>
       <div className="wrapper">
         <form onSubmit={handleSubmit}>
-          <h2>Welcome to Login</h2>
-
+          <h2>Welcome Back</h2>
+          
           <div className="input-field">
             <input type="email" autoComplete="off" aut required onChange={e => setEmail(e.target.value)} />
             <label>Email</label>

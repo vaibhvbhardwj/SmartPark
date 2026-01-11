@@ -17,10 +17,26 @@ export const protect = (req, res, next) => {
   }
 };
 
-// Role check
+// Role check - super admin only
 export const adminOnly = (req, res, next) => {
-  if (req.user.role !== "admin") {
-    return res.status(403).json({ message: "Admin access only" });
+  if (req.user.role !== "admin" && req.user.role !== "company_admin") {
+    return res.status(403).json({ message: "Admin access required" });
+  }
+  next();
+};
+
+// Role check - admin or company admin
+export const adminOrCompanyAdmin = (req, res, next) => {
+  if (req.user.role !== "admin" && req.user.role !== "company_admin") {
+    return res.status(403).json({ message: "Admin or Company Admin access only" });
+  }
+  next();
+};
+
+// Role check - company admin only
+export const companyAdminOnly = (req, res, next) => {
+  if (req.user.role !== "company_admin") {
+    return res.status(403).json({ message: "Company Admin access only" });
   }
   next();
 };

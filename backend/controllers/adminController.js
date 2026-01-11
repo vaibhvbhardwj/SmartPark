@@ -1,5 +1,6 @@
 import Slot from "../models/Slot.js";
 import Booking from "../models/Booking.js";
+import ParkingArea from "../models/ParkingArea.js";
 
 // CREATE SLOT (ADMIN)
 export const createSlot = async (req, res) => {
@@ -29,5 +30,31 @@ export const getAllBookings = async (req, res) => {
     res.json(bookings);
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+};
+
+export const getAdminStats = async (req, res) => {
+  try {
+    const totalAreas = await ParkingArea.countDocuments();
+
+    const totalSlots = await Slot.countDocuments();
+
+    const activeSessions = await Booking.countDocuments({
+      status: "ACTIVE"
+    });
+
+    const revenueAgg = await Booking.aggregate([
+      { $match: { status: "COMPLETED" } },
+      { $group: { _id: null, total: { $sum: "$totalAmount" } } }
+    ]);
+
+    res.json({
+      totalAreas,
+      totalSlots,
+      activeSessions,
+      revenue: revenueAgg[0]?.total || 0
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };

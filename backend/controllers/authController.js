@@ -48,7 +48,9 @@ export const loginUser = async (req, res) => {
 
     res.json({
       token,
-      role: user.role
+      role: user.role,
+      name: user.name,
+      profilePicture: user.profilePicture
     });
   } catch (error) {
     res.status(500).json({ message: error.message });

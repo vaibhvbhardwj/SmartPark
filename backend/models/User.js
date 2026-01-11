@@ -21,8 +21,16 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["user", "admin"],
+      enum: ["user", "admin", "company_admin"],
       default: "user"
+    },
+    company: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Company"
+    },
+    profilePicture: {
+      type: String,
+      default: ""
     }
   },
   { timestamps: true }
