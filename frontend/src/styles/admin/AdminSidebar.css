@@ -136,3 +136,59 @@
     padding-top: 4rem;
   }
 }
+
+/* Mobile Sidebar Styles */
+@media (max-width: 1024px) {
+  .admin-sidebar {
+    position: fixed;
+    left: -260px; /* Hide off-screen */
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+    transition: left 0.3s ease;
+    width: 260px;
+  }
+
+  .admin-sidebar.open {
+    left: 0; /* Slide in */
+  }
+
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+
+  .mobile-close-btn {
+    display: block;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+}
+
+/* Hide toggle buttons on desktop */
+@media (min-width: 1025px) {
+  .hamburger-menu, .mobile-close-btn {
+    display: none;
+  }
+}
+
+/* Hamburger button styling */
+.hamburger-menu {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}

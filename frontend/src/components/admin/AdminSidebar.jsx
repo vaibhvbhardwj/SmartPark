@@ -1,17 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
 import { 
-  LayoutDashboard, 
-  Building2, 
-  MapPin, 
-  SquareParking, 
-  Settings, 
-  BarChart3,
-  Users,
-  Home
+  LayoutDashboard, Building2, MapPin, SquareParking, 
+  Settings, BarChart3, Users, Home, X 
 } from "lucide-react";
 import "../../styles/admin/AdminSidebar.css";
 
-export default function AdminSidebar() {
+// Accept isOpen and toggleSidebar as props
+export default function AdminSidebar({ isOpen, toggleSidebar }) {
   const location = useLocation();
 
   const navItems = [
@@ -26,26 +21,38 @@ export default function AdminSidebar() {
   ];
 
   return (
-    <div className="admin-sidebar">
-      <div className="sidebar-header">
-        <div className="logo">
-          <SquareParking size={32} />
-          <span>ADMIN</span>
-        </div>
-      </div>
+    <>
+      {/* Overlay for mobile: clicking outside sidebar closes it */}
+      {isOpen && <div className="sidebar-overlay" onClick={toggleSidebar}></div>}
 
-      <nav className="sidebar-nav">
-        {navItems.map(item => (
-          <Link
-            key={item.path}
-            to={item.path}
-            className={`nav-item ${location.pathname === item.path ? "active" : ""}`}
-          >
-            <item.icon size={20} />
-            <span>{item.label}</span>
-          </Link>
-        ))}
-      </nav>
-    </div>
+      <div className={`admin-sidebar ${isOpen ? "open" : ""}`}>
+        <div className="sidebar-header">
+          <div className="logo">
+            <SquareParking size={32} />
+            <span>ADMIN</span>
+          </div>
+          {/* Close button only visible on mobile */}
+          <button className="mobile-close-btn" onClick={toggleSidebar}>
+            <X size={24} />
+          </button>
+        </div>
+
+        <nav className="sidebar-nav">
+          {navItems.map(item => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`nav-item ${location.pathname === item.path ? "active" : ""}`}
+              onClick={() => {
+                if (window.innerWidth < 1024) toggleSidebar(); // Auto-close on link click (mobile)
+              }}
+            >
+              <item.icon size={20} />
+              <span>{item.label}</span>
+            </Link>
+          ))}
+        </nav>
+      </div>
+    </>
   );
 }

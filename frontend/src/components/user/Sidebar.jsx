@@ -12,7 +12,7 @@ import {
   TrendingUp
 } from "lucide-react";
 import { useState } from "react";
-import "../../styles/user/Sidebar.css";
+import "../../styles/user/sidebar.css";
 
 export default function Sidebar() {
   const location = useLocation();
