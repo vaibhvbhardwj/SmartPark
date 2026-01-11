@@ -172,13 +172,6 @@
   }
 }
 
-/* Hide toggle buttons on desktop */
-@media (min-width: 1025px) {
-  .hamburger-menu, .mobile-close-btn {
-    display: none;
-  }
-}
-
 /* Hamburger button styling */
 .hamburger-menu {
   background: none;
@@ -191,4 +184,35 @@
 .header-left {
   display: flex;
   align-items: center;
+}
+
+@media (max-width: 1024px) {
+  .admin-sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%; /* Completely off-screen by default */
+    width: 280px; /* Fixed width for mobile */
+    height: 100vh;
+    background: #161b22;
+    z-index: 2000; /* Higher than the dashboard content */
+    transition: left 0.3s ease-in-out;
+    box-shadow: 10px 0 15px -3px rgba(0, 0, 0, 0.5);
+  }
+
+  /* This class is added when isSidebarOpen is true */
+  .admin-sidebar.open {
+    left: 0; 
+  }
+
+  /* Add an overlay to dim the background when sidebar is open */
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: 1999;
+  }
 }
