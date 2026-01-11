@@ -193,8 +193,8 @@
     left: -100%; /* Completely off-screen by default */
     width: 280px; /* Fixed width for mobile */
     height: 100vh;
-    background: #161b22;
-    z-index: 2000; /* Higher than the dashboard content */
+    background: #b2bccb !important;
+    z-index: 10000; /* Higher than the dashboard content */
     transition: left 0.3s ease-in-out;
     box-shadow: 10px 0 15px -3px rgba(0, 0, 0, 0.5);
   }
@@ -202,6 +202,20 @@
   /* This class is added when isSidebarOpen is true */
   .admin-sidebar.open {
     left: 0; 
+  }
+
+  /* Ensure the links inside are white/bright */
+  .nav-item {
+    color: #adbac7 !important;
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    text-decoration: none;
+  }
+
+  .nav-item.active {
+    background: #21262d;
+    color: #58a6ff !important; /* Blue for active link */
   }
 
   /* Add an overlay to dim the background when sidebar is open */
@@ -213,6 +227,7 @@
     height: 100vh;
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(4px);
-    z-index: 1999;
+    z-index: 9999;
+    backdrop-filter: blur(2px);
   }
 }

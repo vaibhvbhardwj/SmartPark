@@ -74,10 +74,10 @@
   display: none;
   background: none;
   border: none;
-  color: #333;
+  color: #333 !important ;
   cursor: pointer;
   padding: 8px;
-  z-index: 1001;
+  z-index: 1002;
   transition: color 0.3s ease;
 }
 
@@ -92,10 +92,10 @@
   left: -100%;
   width: 280px;
   height: 100vh;
-  background-color: #ffffff;
+  background-color: #837777 !important;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
   transition: left 0.3s ease;
-  z-index: 999;
+  z-index: 1002;
   overflow-y: auto;
 }
 
