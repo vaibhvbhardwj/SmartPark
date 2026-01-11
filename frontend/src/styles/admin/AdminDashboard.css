@@ -280,3 +280,25 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Mobile Hamburger Button */
+.hamburger-btn {
+  display: none; /* Hidden by default */
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 5px;
+  margin-right: 15px;
+}
+
+@media (max-width: 1024px) {
+  .hamburger-btn {
+    display: block; /* Show only on mobile/tablets */
+  }
+  
+  .page-header-admin {
+    display: flex;
+    align-items: center;
+  }
+}

@@ -7,13 +7,15 @@ import {
   Users, 
   TrendingUp,
   Plus,
-  Activity
+  Activity,
+  Menu
 } from "lucide-react";
 import api from "../api/axios";
 import AdminSidebar from "../components/admin/AdminSidebar";
 import "../styles/admin/AdminDashboard.css";
 
 export default function AdminDashboard() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [stats, setStats] = useState({
     totalAreas: 0,
     totalSlots: 0,
@@ -103,10 +105,13 @@ export default function AdminDashboard() {
 
   return (
     <div className="admin-layout">
-      <AdminSidebar />
+      <AdminSidebar isOpen={isSidebarOpen} toggle={() => setIsSidebarOpen(false)} />
       
       <div className="admin-content">
         <div className="page-header-admin">
+          <button className="hamburger-btn" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+            <Menu size={24} />
+          </button>
           <div>
             <h1>Admin Dashboard</h1>
             <p>Seamless Parking Management</p>
