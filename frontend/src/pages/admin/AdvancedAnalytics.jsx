@@ -4,12 +4,48 @@ import AdminSidebar from "../../components/admin/AdminSidebar";
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import { TrendingUp, Users, Clock, AlertCircle } from "lucide-react";
 import "../../styles/admin/AdvancedAnalytics.css";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const COLORS = ['#006AFF', '#10B981', '#F59E0B', '#EF4444'];
 
 export default function AdvancedAnalyticsAdmin() {
   const [analytics, setAnalytics] = useState(null);
   const [loading, setLoading] = useState(true);
+  const downloadAnalyticsPDF = async () => {
+  const element = document.getElementById("analytics-download");
+
+  const canvas = await html2canvas(element, {
+    scale: 2,            // high quality
+    useCORS: true,
+    backgroundColor: "#ffffff",
+    scrollY: -window.scrollY
+  });
+
+  const imgData = canvas.toDataURL("image/png");
+
+  const pdf = new jsPDF("p", "mm", "a4");
+  const pdfWidth = pdf.internal.pageSize.getWidth();
+  const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+  let heightLeft = pdfHeight;
+  let position = 0;
+
+  // FIRST PAGE
+  pdf.addImage(imgData, "PNG", 0, position, pdfWidth, pdfHeight);
+  heightLeft -= pdf.internal.pageSize.getHeight();
+
+  // EXTRA PAGES IF CONTENT IS LONG
+  while (heightLeft > 0) {
+    position = heightLeft - pdfHeight;
+    pdf.addPage();
+    pdf.addImage(imgData, "PNG", 0, position, pdfWidth, pdfHeight);
+    heightLeft -= pdf.internal.pageSize.getHeight();
+  }
+
+  pdf.save("advanced-analytics-report.pdf");
+};
+
 
   useEffect(() => {
     loadAnalytics();
@@ -73,7 +109,7 @@ export default function AdvancedAnalyticsAdmin() {
     <div className="admin-layout">
       <AdminSidebar />
       
-      <div className="admin-content">
+      <div className="admin-content" id="analytics-download" >
         <div className="page-header-admin">
           <div>
             <h1>Advanced Analytics</h1>
@@ -321,6 +357,23 @@ export default function AdvancedAnalyticsAdmin() {
             </div>
           </div>
         </div>
+        <div style={{ marginTop: "40px", textAlign: "center" }}>
+  <button
+    onClick={downloadAnalyticsPDF}
+    style={{
+      padding: "12px 24px",
+      background: "#006AFF",
+      color: "#fff",
+      border: "none",
+      borderRadius: "8px",
+      fontSize: "16px",
+      cursor: "pointer"
+    }}
+  >
+    📥 Download Analytics Report (PDF)
+  </button>
+</div>
+
       </div>
     </div>
   );

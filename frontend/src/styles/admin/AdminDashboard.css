@@ -2,7 +2,7 @@
   display: flex;
   min-height: 100vh;
   background: var(--background);
-  
+  position: relative;
 }
 
 .admin-content {
@@ -283,30 +283,44 @@
 
 /* Mobile Hamburger Button */
 .hamburger-btn {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
-  background: #2563eb; /* Give it a solid primary blue background */
+  background: var(--primary);
   border: none;
-  color: #ffffff !important; /* Force the icon to be white */
-  padding: 10px;
+  color: white;
+  padding: 0.75rem;
   border-radius: 8px;
   cursor: pointer;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  z-index: 1001; /* Ensure it stays above everything */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+  margin-right: 1rem;
+}
+
+.hamburger-btn:hover {
+  background: var(--primary-hover);
+  transform: scale(1.05);
+}
+
+.hamburger-btn:active {
+  transform: scale(0.95);
 }
 
 .hamburger-btn svg {
-  stroke: white; /* Ensure the lucide icon lines are white */
+  stroke: white;
 }
 
 @media (max-width: 1024px) {
   .hamburger-btn {
-    display: block; /* Show only on mobile/tablets */
+    display: flex;
   }
   
   .page-header-admin {
     display: flex;
     align-items: center;
+  }
+
+  .admin-content {
+    padding-top: 1.5rem;
   }
 }

@@ -105,7 +105,7 @@ export default function AdminDashboard() {
 
   return (
     <div className="admin-layout">
-      <AdminSidebar isOpen={isSidebarOpen} toggle={() => setIsSidebarOpen(false)} />
+      <AdminSidebar isOpen={isSidebarOpen} toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
       
       <div className="admin-content">
         <div className="page-header-admin">

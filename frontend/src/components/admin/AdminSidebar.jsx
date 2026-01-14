@@ -23,7 +23,10 @@ export default function AdminSidebar({ isOpen, toggleSidebar }) {
   return (
     <>
       {/* Overlay for mobile: clicking outside sidebar closes it */}
-      {isOpen && <div className="sidebar-overlay" onClick={toggleSidebar}></div>}
+      <div 
+        className={`admin-sidebar-overlay ${isOpen ? "active" : ""}`} 
+        onClick={toggleSidebar}
+      />
 
       <div className={`admin-sidebar ${isOpen ? "open" : ""}`}>
         <div className="sidebar-header">
@@ -32,7 +35,7 @@ export default function AdminSidebar({ isOpen, toggleSidebar }) {
             <span>ADMIN</span>
           </div>
           {/* Close button only visible on mobile */}
-          <button className="mobile-close-btn" onClick={toggleSidebar}>
+          <button className="admin-mobile-close-btn" onClick={toggleSidebar}>
             <X size={24} />
           </button>
         </div>

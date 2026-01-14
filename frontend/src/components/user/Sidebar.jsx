@@ -46,9 +46,10 @@ export default function Sidebar() {
       </button>
 
       {/* Mobile Overlay */}
-      {isMobileOpen && (
-        <div className="sidebar-overlay" onClick={toggleMobile} />
-      )}
+      <div 
+        className={`sidebar-overlay ${isMobileOpen ? "active" : ""}`} 
+        onClick={toggleMobile}
+      />
 
       {/* Sidebar */}
       <aside className={`sidebar ${isMobileOpen ? "mobile-open" : ""}`}>

@@ -25,7 +25,7 @@ const app = express();
 
 app.use(cors({
   origin: process.env.FRONTEND_URL || "*", // Fallback to all for now, but use your Vercel/Render URL later
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   credentials: true
 }));
 
